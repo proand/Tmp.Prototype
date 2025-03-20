@@ -1,0 +1,7 @@
+<div class="mb-3">
+  @for (layout of layouts(); track $index) {
+    <app-layout-menu-item [layout]="layout" [index]="$index"></app-layout-menu-item>
+  } @empty {
+    There are no "Layouts"
+  }
+</div>

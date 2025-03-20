@@ -1,0 +1,9 @@
+# Default
+
+**/.git
+
+**/.svn
+
+**/.hg
+
+**/node_modules

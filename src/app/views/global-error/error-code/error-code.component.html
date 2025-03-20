@@ -1,0 +1,8 @@
+<p class="small">ErrorCodeComponent</p>
+
+@if (errorCode()) {
+  <p><strong>Error code:</strong> {{ errorCode() }}</p>
+}
+@if (errorMessage()) {
+  <p><strong>Error message:</strong> {{ errorMessage() }}</p>
+}

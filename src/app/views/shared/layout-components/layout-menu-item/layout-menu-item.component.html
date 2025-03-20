@@ -1,0 +1,6 @@
+<span
+  class="badge rounded-pill border me-3"
+  [ngClass]="{ 'text-bg-dark': layout().active, 'text-bg-light': !layout().active }"
+>
+  {{ layout().title }}
+</span>

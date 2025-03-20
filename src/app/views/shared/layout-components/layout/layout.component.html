@@ -1,0 +1,7 @@
+<div class="row">
+  @for (column of layoutColumns(); track $index) {
+    <app-layout-column class="col" [layoutColumn]="column" [index]="$index"></app-layout-column>
+  } @empty {
+    There are no "LayoutColumns"
+  }
+</div>

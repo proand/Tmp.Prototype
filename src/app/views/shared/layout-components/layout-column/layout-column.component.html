@@ -1,0 +1,10 @@
+@for (group of contentContainerGroups(); track $index) {
+  <app-content-container-group
+    [ngStyle]="{ height: containerGroupHeight() }"
+    [contentContainerGroup]="group"
+    [index]="$index"
+    [layoutColumnIndex]="index()"
+  ></app-content-container-group>
+} @empty {
+  There are no "ContentContainerGroups"
+}

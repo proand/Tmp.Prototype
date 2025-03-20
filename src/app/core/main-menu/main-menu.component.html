@@ -1,0 +1,88 @@
+<div class="d-flex">
+  <div>
+    <ul class="nav">
+      <li class="nav-item">
+        <img src="logo-gisbas.png" style="width: 35px; height: 35px; margin: 5px 10px 0 -7px" alt="logo" />
+      </li>
+    </ul>
+  </div>
+
+  <!-- Innspill til diskusjon :) -->
+  <!--
+  <div class="me-auto">
+    <ng-container *ngTemplateOutlet="topLevelSectionItems; context: { items: mainMenuItems }"></ng-container>
+  </div>
+  -->
+
+  <div class="me-auto">
+    <ng-container *ngTemplateOutlet="activeSectionSubItems; context: { items: sectionSubMenuItems }"></ng-container>
+  </div>
+
+  <div>
+    <ul class="nav">
+      <li class="nav-item me-3">
+        <i class="bi bi-gear"></i>
+      </li>
+      <li class="nav-item">
+        <i class="bi bi-person-circle"></i>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #topLevelSectionItems let-items="items">
+  <ul class="nav" id="topLevelSectionItems">
+    @for (item of items; track $index) {
+      <li class="nav-item">
+        @if (item.routerLink) {
+          <a class="nav-link" [routerLink]="item.routerLink">
+            {{ item.name }}
+          </a>
+        } @else {
+          <span class="nav-link">
+            {{ item.name }}
+          </span>
+        }
+      </li>
+    }
+  </ul>
+</ng-template>
+
+<ng-template #activeSectionSubItems let-items="items">
+  <ul class="nav" id="activeSectionSubItems">
+    @for (item of items; track $index) {
+      @if (item.children) {
+        <ng-container *ngTemplateOutlet="dropdownItem; context: { item: item }"></ng-container>
+      } @else if (item.routerLink) {
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="item.routerLink">
+            {{ item.name }}
+          </a>
+        </li>
+      } @else {
+        <li class="nav-item">
+          <span class="nav-link">
+            {{ item.name }}
+          </span>
+        </li>
+      }
+    }
+  </ul>
+</ng-template>
+
+<ng-template #dropdownItem let-item="item">
+  <li ngbDropdown class="nav-item">
+    <a class="nav-link" ngbDropdownToggle>{{ item.name }}</a>
+    <div ngbDropdownMenu>
+      @for (item of item.children; track $index) {
+        @if (item.children) {
+          <ng-container *ngTemplateOutlet="dropdownItem; context: { item: item }"></ng-container>
+        } @else {
+          <button [routerLink]="item.routerLink" ngbDropdownItem>
+            {{ item.name }}
+          </button>
+        }
+      }
+    </div>
+  </li>
+</ng-template>

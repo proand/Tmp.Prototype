@@ -1,0 +1,26 @@
+<!-- DEBUGGING -->
+<!-- <div class="bg-secondary-subtle border border-secondary-subtle p-3 mb-3">
+  <pre>ContenContainerGroup</pre>
+  <pre>{{ contentContainerGroup() | json }}</pre>
+</div> -->
+<!-- /DEBUGGING -->
+
+<ul ngbNav #nav="ngbNav" [(activeId)]="contentContainerGroup().activeDomainContentId" class="nav-tabs">
+  @for (container of contentContainerGroup().containers; track $index) {
+    <li [ngbNavItem]="container.domainContent.id">
+      <button
+        ngbNavLink
+        title="{{ container.domainContent.title }}"
+        (click)="setContentContainerToActive($index, container.domainContent.id)"
+      >
+        {{ container.domainContent.shortTitle }}
+      </button>
+      <ng-template ngbNavContent>
+        <app-content-container [contentContainer]="container" [index]="$index"></app-content-container>
+      </ng-template>
+    </li>
+  } @empty {
+    There are no contents
+  }
+</ul>
+<div [ngbNavOutlet]="nav"></div>

@@ -1,0 +1,13 @@
+<!-- DEBUGGING -->
+<!-- <div class="bg-light border p-3 mb-4">
+  <pre>ContenContainer</pre>
+  <pre>{{ contentContainer() | json }}</pre>
+</div> -->
+<!-- /DEBUGGING -->
+
+<!-- Alle skjmaer (og annet innhold) som skal kunne vises i en tab må ha hver sin @case i denne switch-en. -->
+@switch (gisbasComponentId()) {
+  @case (GisbasComponentId.VelkommenTilDemo) {
+    <app-velkommen-til-demo></app-velkommen-til-demo>
+  }
+}

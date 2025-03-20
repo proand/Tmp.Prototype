@@ -1,0 +1,8 @@
+@if (layouts()) {
+  @if (showLayoutMenu) {
+    <app-layout-menu [layouts]="layouts()"></app-layout-menu>
+  }
+  <app-layout [layout]="activeLayout()"></app-layout>
+} @else {
+  <app-spinner></app-spinner>
+}

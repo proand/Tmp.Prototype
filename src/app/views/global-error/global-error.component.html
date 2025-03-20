@@ -1,0 +1,8 @@
+@switch (errorCode) {
+  @case (errorCode500) {
+    <app-error-code [errorMessage]="errorMessage" [errorCode]="errorCode"></app-error-code>
+  }
+  @default {
+    <app-page-not-found></app-page-not-found>
+  }
+}
