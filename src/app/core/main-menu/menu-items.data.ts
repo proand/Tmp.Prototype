@@ -27,8 +27,8 @@ export const mainMenuItems: MenuItem[] = [
         name: 'Søk',
         children: [
           {
-            name: `${getComponentMenuItemName(ComponentId.SokStandard)}`,
-            routerLink: `${SectionId.Prototype}/${ComponentId.SokStandard}`,
+            name: `${getComponentMenuItemName(ComponentId.StandardSok)}`,
+            routerLink: `${SectionId.Prototype}/${ComponentId.StandardSok}`,
           },
         ],
       },

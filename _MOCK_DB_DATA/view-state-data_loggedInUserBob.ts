@@ -1,4 +1,4 @@
-export const ViewStateDataLoggedInUser = {
+export const ViewStateDataLoggedInUserBob = {
   layouts: [
     { active: false, parentSectionId: 0, title: '20250313-1', columns: [] },
     {

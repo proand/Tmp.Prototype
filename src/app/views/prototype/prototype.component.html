@@ -1,8 +1,10 @@
-@if (layouts()) {
-  @if (showLayoutMenu) {
-    <app-layout-menu [layouts]="layouts()"></app-layout-menu>
+@if (showLaoutRoot()) {
+  @if (showLayoutMenu && prototypeLayouts().length > 0) {
+    <app-layout-menu [layouts]="prototypeLayouts()"></app-layout-menu>
   }
-  <app-layout [layout]="activeLayout()"></app-layout>
+  @if (activePrototypeLayout().layoutColumns) {
+    <app-layout [layout]="activePrototypeLayout()"></app-layout>
+  }
 } @else {
   <app-spinner></app-spinner>
 }

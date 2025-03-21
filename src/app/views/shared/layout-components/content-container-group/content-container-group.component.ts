@@ -1,14 +1,10 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 
 import { SharedModule } from '@app/shared/shared.module';
 import { ViewStateService } from '@app/shared/view-state/view-state.service';
-import {
-  ContentContainerGroup,
-  ViewStateActionData,
-} from '@app/shared/view-state/view-state.models';
+import { ContentContainer, ContentContainerGroup } from '@app/shared/view-state/view-state.models';
 
 import { ContentContainerComponent } from '../content-container/content-container.component';
-import { ViewStateUpdateAction } from '@app/shared/view-state/view-state-action.enum';
 
 @Component({
   selector: 'app-content-container-group',
@@ -16,25 +12,28 @@ import { ViewStateUpdateAction } from '@app/shared/view-state/view-state-action.
   templateUrl: './content-container-group.component.html',
   styleUrl: './content-container-group.component.scss',
 })
-export class ContentContainerGroupComponent implements OnInit {
+export class ContentContainerGroupComponent {
   private stateService = inject(ViewStateService);
-  private actionData = new ViewStateActionData();
+  private contentContainer: ContentContainer = {
+    active: true,
+    gisbasComponentId: this.stateService.activeGisbasComponentId(),
+    domainContent: {
+      id: null,
+      title: null,
+      shortTitle: null,
+    },
+  };
 
   contentContainerGroup = input.required<ContentContainerGroup>();
   index = input.required<number>();
   layoutColumnIndex = input.required<number>();
 
-  ngOnInit() {
-    this.actionData.layoutColumnIndex = this.layoutColumnIndex();
-    this.actionData.contentContainerGroupIndex = this.index();
-  }
+  contentContainers = computed(() => {
+    const containers = this.contentContainerGroup().containers;
 
-  setContentContainerToActive(contentContainerIndex: number, activeDomainContentId: number) {
-    this.actionData.contentContainerIndex = contentContainerIndex;
-    this.actionData.activeDomainContentId = activeDomainContentId;
-
-    console.log('this.actionData', this.actionData);
-
-    this.stateService.updateState(ViewStateUpdateAction.setContentToActive, this.actionData);
-  }
+    if (containers.length > 0) {
+      return containers;
+    }
+    return [this.contentContainer];
+  });
 }

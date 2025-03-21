@@ -3,24 +3,40 @@ import { catchError, delay, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environment';
-import { ViewState, ViewStateActionData } from './view-state.models';
-import { RunViewStateUpdateAction, ViewStateUpdateActions } from './view-state-actions';
+import { LayoutRoot, ViewState } from './view-state.models';
 
-const MOCK_URL_ViewState = `${environment.apiBaseUrl}/ViewStateDataLoggedInUser`;
+//
+// DEMO
+//
+const MOCK_URL_ViewState = `${environment.apiBaseUrl}/ViewStateDataLoggedInUserAlice`;
+// const MOCK_URL_ViewState = `${environment.apiBaseUrl}/ViewStateDataLoggedInUserBob`;
 
 @Injectable({
   providedIn: 'root',
 })
 export class ViewStateService {
   private http = inject(HttpClient);
+
   private _viewState: WritableSignal<ViewState | null> = signal(null);
-  private _layoutIndex = 0;
   private _activeGisbasComponentId: WritableSignal<number> = signal(0);
+  private _canShowLayoutRoot: WritableSignal<boolean> = signal(false);
+
+  // TODO: should this be assigned somewhere else, and have a setter here?
+  private _layoutIndex = 0;
+
+  //
+  // DEMO
+  // - Bob er et innspill til diskusjon (endre MOCK_URL_ViewState for å få Bobs data)
+  //
+  private _showLayoutMenu = false; // Alice
+  // private _showLayoutMenu = true; // Bob
+  //
 
   constructor() {
     this.getInitialViewState().subscribe((state) => {
-      // TODO: Handle state = undefined -> new ViewState()
+      // console.log('state', state);
       this._viewState.set(state);
+      this._canShowLayoutRoot.set(true);
     });
   }
 
@@ -40,15 +56,20 @@ export class ViewStateService {
     this._activeGisbasComponentId.set(value);
   }
 
-  // TODO: Rename based on what you actually update
-  updateState(action: number, target: ViewStateActionData) {
+  get showLayoutMenu(): boolean {
+    return this._showLayoutMenu;
+  }
+
+  get canShowLayoutRoot(): Signal<boolean> {
+    return this._canShowLayoutRoot;
+  }
+
+  updateState(newLayoutRoot: LayoutRoot) {
     this._viewState.update((state) => {
       if (state?.layouts) {
-        RunViewStateUpdateAction(
-          ViewStateUpdateActions[action],
-          target,
-          state.layouts[this._layoutIndex]?.layoutColumns,
-        );
+        state.layouts.push(newLayoutRoot);
+      } else if (state) {
+        state.layouts = [newLayoutRoot];
       }
       return state;
     });

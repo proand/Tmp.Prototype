@@ -1,12 +1,12 @@
-export interface ViewState {
-  layouts?: LayoutRoot[];
+export class ViewState {
+  layouts?: LayoutRoot[] | null;
 }
 
 export interface LayoutRoot {
   active: boolean;
   layoutColumns: LayoutColumn[];
   parentSectionId: number;
-  title: string;
+  title: string | null;
 }
 
 export interface LayoutColumn {
@@ -16,23 +16,20 @@ export interface LayoutColumn {
 
 export interface ContentContainerGroup {
   active: boolean;
-  activeDomainContentId: number;
+  activeDomainContentId: number | null;
   containers: ContentContainer[];
 }
 
 export interface ContentContainer {
   active: boolean;
-
-  // Which Angular component (in the gisbas domain) to use for rendering this domain content
   gisbasComponentId: number;
-  contentContainerId: number;
+  domainContent: DomainContent;
+}
 
-  // Data from domaine component with gisbasComponentId === 0
-  domainContent: {
-    id: number;
-    title: string;
-    shortTitle: string;
-  };
+export class DomainContent {
+  id: number | null = null;
+  title: string | null = null;
+  shortTitle: string | null = null;
 }
 
 export class ViewStateActionData {
