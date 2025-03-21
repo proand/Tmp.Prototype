@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
-import { LayoutColumn, LayoutRoot } from '@app/shared/view-state/view-state.models';
+import { LayoutRoot } from '@app/shared/view-state/view-state.models';
 import { LayoutColumnComponent } from '../layout-column/layout-column.component';
 
 @Component({
@@ -10,18 +10,9 @@ import { LayoutColumnComponent } from '../layout-column/layout-column.component'
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
-  private newLayoutColumn: LayoutColumn = {
-    active: true,
-    containerGroups: [],
-  };
-
   layout = input.required<LayoutRoot>();
   layoutColumns = computed(() => {
-    const columns = this.layout().layoutColumns;
-
-    if (columns.length > 0) {
-      return columns;
-    }
-    return [this.newLayoutColumn];
+    // console.log('2. columns', this.layout().layoutColumns);
+    return this.layout().layoutColumns;
   });
 }

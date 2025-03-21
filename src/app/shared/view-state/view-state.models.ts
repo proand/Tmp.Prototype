@@ -2,11 +2,11 @@ export class ViewState {
   layouts?: LayoutRoot[] | null;
 }
 
-export interface LayoutRoot {
-  active: boolean;
-  layoutColumns: LayoutColumn[];
-  parentSectionId: number;
-  title: string | null;
+export class LayoutRoot {
+  active = true;
+  layoutColumns: LayoutColumn[] = [];
+  parentSectionId: number | null = null;
+  title: string | null = null;
 }
 
 export interface LayoutColumn {
@@ -30,6 +30,7 @@ export class DomainContent {
   id: number | null = null;
   title: string | null = null;
   shortTitle: string | null = null;
+  parentLayoutRootTitle: string | null = null;
 }
 
 export class ViewStateActionData {

@@ -15,7 +15,6 @@ import { StandarsSokComponent } from '@GISBAS_COMPONENTS/standars-sok/standars-s
 })
 export class ContentContainerComponent {
   contentContainer = input.required<ContentContainer>();
-  index = input.required<number>();
 
   gisbasComponentId = computed(() => this.contentContainer().gisbasComponentId);
   GisbasComponentId = GisbasComponentId;

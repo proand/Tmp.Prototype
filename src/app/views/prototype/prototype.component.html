@@ -1,4 +1,4 @@
-@if (showLaoutRoot()) {
+@if (showLayoutRoot()) {
   @if (showLayoutMenu && prototypeLayouts().length > 0) {
     <app-layout-menu [layouts]="prototypeLayouts()"></app-layout-menu>
   }
@@ -6,5 +6,8 @@
     <app-layout [layout]="activePrototypeLayout()"></app-layout>
   }
 } @else {
-  <app-spinner></app-spinner>
+  <div class="d-flex align-items-start align-items-center">
+    <p class="m-0 me-2">Laster layout</p>
+    <app-spinner [size]="'sm'"></app-spinner>
+  </div>
 }

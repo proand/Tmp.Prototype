@@ -1,31 +1,41 @@
 <!-- DEBUGGING -->
-<div class="bg-secondary-subtle border border-secondary-subtle p-3 mb-3">
+<!-- <div class="bg-secondary-subtle border border-secondary-subtle p-3 mb-3">
   <pre>ContenContainerGroup</pre>
   <pre>{{ contentContainerGroup() | json }}</pre>
 
   <pre>contentContainers</pre>
   <pre>{{ contentContainers() | json }}</pre>
-</div>
+</div> -->
 <!-- /DEBUGGING -->
 
-@if (contentContainers()[0].domainContent.id) {
-  <ul ngbNav #nav="ngbNav" [(activeId)]="contentContainerGroup().activeDomainContentId" class="nav-tabs">
+<ul ngbNav #nav="ngbNav" [(activeId)]="activeIndex" class="nav-tabs">
+  @for (container of contentContainers(); track $index) {
+    <li [ngbNavItem]="$index">
+      <button ngbNavLink title="{{ container.domainContent.title }}">
+        [Type]: {{ container.domainContent.shortTitle }}
+      </button>
+      <ng-template ngbNavContent>
+        <app-content-container [contentContainer]="container"></app-content-container>
+      </ng-template>
+    </li>
+  }
+</ul>
+<div [ngbNavOutlet]="nav"></div>
+
+<!-- @if (contentContainers()[0].domainContent.id) {
+  <ul ngbNav #nav="ngbNav" [(activeId)]="activeIndex" class="nav-tabs">
     @for (container of contentContainers(); track $index) {
-      <li [ngbNavItem]="container.domainContent.id">
-        <button
-          ngbNavLink
-          title="{{ container.domainContent.title }}"
-          (click)="setContentContainerToActive($index, container.domainContent.id)"
-        >
+      <li [ngbNavItem]="$index">
+        <button ngbNavLink title="{{ container.domainContent.title }}">
           {{ container.domainContent.shortTitle }}
         </button>
         <ng-template ngbNavContent>
-          <app-content-container [contentContainer]="container" [index]="$index"></app-content-container>
+          <app-content-container [contentContainer]="container"></app-content-container>
         </ng-template>
       </li>
     }
   </ul>
   <div [ngbNavOutlet]="nav"></div>
 } @else {
-  <app-content-container [contentContainer]="contentContainers()[0]" [index]="0"></app-content-container>
-}
+  <app-content-container [contentContainer]="contentContainers()[0]"></app-content-container>
+} -->

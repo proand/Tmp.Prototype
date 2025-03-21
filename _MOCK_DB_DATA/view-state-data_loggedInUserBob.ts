@@ -19,7 +19,8 @@ export const ViewStateDataLoggedInUserBob = {
                   domainContent: {
                     id: 100,
                     title: 'Full tittel for innhold med id 100',
-                    shortTitle: 'ST-100',
+                    shortTitle: 'Short-100',
+                    parentLayoutRootTitle: '20250313-2',
                   },
                 },
               ],
@@ -34,7 +35,8 @@ export const ViewStateDataLoggedInUserBob = {
                   domainContent: {
                     id: 101,
                     title: 'Full tittel for innhold med id 101',
-                    shortTitle: 'ST-101',
+                    shortTitle: 'Short-101',
+                    parentLayoutRootTitle: '20250313-2',
                   },
                 },
                 {
@@ -43,7 +45,8 @@ export const ViewStateDataLoggedInUserBob = {
                   domainContent: {
                     id: 102,
                     title: 'Full tittel for innhold med id 102',
-                    shortTitle: 'ST-102',
+                    shortTitle: 'Short-102',
+                    parentLayoutRootTitle: '20250313-2',
                   },
                 },
               ],
@@ -63,7 +66,8 @@ export const ViewStateDataLoggedInUserBob = {
                   domainContent: {
                     id: 103,
                     title: 'Full tittel for innhold med id 103',
-                    shortTitle: 'ST-103',
+                    shortTitle: 'Short-103',
+                    parentLayoutRootTitle: '20250313-2',
                   },
                 },
               ],
@@ -83,7 +87,8 @@ export const ViewStateDataLoggedInUserBob = {
                   domainContent: {
                     id: 104,
                     title: 'Full tittel for innhold med id 104',
-                    shortTitle: 'ST-104',
+                    shortTitle: 'Short-104',
+                    parentLayoutRootTitle: '20250313-2',
                   },
                 },
               ],
@@ -92,6 +97,6 @@ export const ViewStateDataLoggedInUserBob = {
         },
       ],
     },
-    { active: false, parentSectionId: 0, title: '20250313-2', columns: [] },
+    { active: false, parentSectionId: 0, title: '20250313-3', columns: [] },
   ],
 };

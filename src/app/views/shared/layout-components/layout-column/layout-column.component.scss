@@ -1,3 +1,9 @@
+// calc([viewport heigh] - [main-menu height])
 :host.col {
-    height: calc(100vh - 65px); // (viewport heigh)  - (main-menu height)
+    height: calc(100vh - 65px);
+}
+
+// calc([viewport heigh] - [main-menu height] - [layout-roots-menu-height])
+:host.col.with-layout-roots-menu {
+    height: calc(100vh - 65px - 100px);
 }
