@@ -16,7 +16,6 @@ export interface LayoutColumn {
 
 export interface ContentContainerGroup {
   active: boolean;
-  activeDomainContentId: number | null;
   containers: ContentContainer[];
 }
 
@@ -34,7 +33,6 @@ export class DomainContent {
 }
 
 export class ViewStateActionData {
-  activeDomainContentId?: number;
   contentContainerIndex?: number;
   contentContainerGroupIndex?: number;
   layoutColumnIndex?: number;

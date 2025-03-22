@@ -10,7 +10,8 @@ export class RedirectService {
     return this.redirect(urlTree);
   }
 
-  // Use it like this from any component or service: return inject(RedirectService).redirectToErrorCode([code], [message]);
+  // Use it like this from any component or service:
+  //   return inject(RedirectService).redirectToErrorCode([code], [message]);
   redirectToErrorCode(errorCode: string, errorMessage: string) {
     const urlTree = inject(Router).parseUrl('N/A');
     urlTree.queryParams = { errorMessage: errorMessage, errorCode: errorCode };

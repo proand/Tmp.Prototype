@@ -25,14 +25,10 @@ export class ViewStateService {
   private http = inject(HttpClient);
   private newLayoutRoot: LayoutRoot = new LayoutRoot();
 
-  // private _viewState: WritableSignal<ViewState | null> = signal(null);
-  private _viewState: WritableSignal<ViewState> = signal(new ViewState());
-
   private _activeGisbasComponentId: WritableSignal<number> = signal(0);
   private _canShowLayoutRoot: WritableSignal<boolean> = signal(false);
-
-  // TODO: should this be assigned somewhere else, and have a setter here?
-  private _layoutIndex = 0;
+  private _layoutIndex = 0; // Used by LayoutMenuItemComponent
+  private _viewState: WritableSignal<ViewState> = signal(new ViewState());
 
   //
   // DEMO
@@ -42,13 +38,36 @@ export class ViewStateService {
   // private _showLayoutMenu = true; // Bob
   //
 
+  //
+  // DEMO
+  // - Denne verdien må leses fra bruker config
+  //
+  private columnCount = 3;
+  //
+
   constructor() {
     this.getInitialViewState().subscribe((state) => {
-      console.log('state', state);
+      // console.log('state', state);
 
       this._viewState.set(state);
       this._canShowLayoutRoot.set(true);
     });
+  }
+
+  get activeGisbasComponentId(): Signal<number> {
+    return this._activeGisbasComponentId;
+  }
+
+  set activeGisbasComponentId(value: number) {
+    this._activeGisbasComponentId.set(value);
+  }
+
+  get canShowLayoutRoot(): Signal<boolean> {
+    return this._canShowLayoutRoot;
+  }
+
+  set layoutIndex(value: number) {
+    this._layoutIndex = value;
   }
 
   get viewState(): Signal<ViewState> {
@@ -59,46 +78,31 @@ export class ViewStateService {
     return this._showLayoutMenu;
   }
 
-  get canShowLayoutRoot(): Signal<boolean> {
-    return this._canShowLayoutRoot;
-  }
-
-  // TODO: tror ikke jeg trenger denne...
-  get activeGisbasComponentId(): Signal<number> {
-    return this._activeGisbasComponentId;
-  }
-  set activeGisbasComponentId(value: number) {
-    this._activeGisbasComponentId.set(value);
-  }
-
-  set layoutIndex(value: number) {
-    this._layoutIndex = value;
-  }
-
   getNewLayoutRoot(parentSectionId: number): LayoutRoot {
     return this.createNewLayoutRoot(parentSectionId);
   }
 
-  // TODO: where and how to update state?
-  //   - maybe private newLayoutRoots: LayoutRoot[];
-  //   - when ready (domain-content loaded etc.) -> this.stateService.updateState();
+  //
+  //
+  //
+  // DEMO
+  // - All code for state handling is WIP!
+  //
   updateStateWithDomainContent(domainContent: DomainContent) {
     this._viewState.update((state) => {
-      console.log('domainContent', domainContent);
-      console.log('this.newLayoutRoot', this.newLayoutRoot);
+      // console.log('domainContent', domainContent);
+      // console.log('this.newLayoutRoot', this.newLayoutRoot);
 
       if (state?.layouts) {
-        console.log('state?.layouts', state?.layouts);
+        // console.log('state?.layouts', state?.layouts);
         state.layouts.push(this.newLayoutRoot);
       } else if (state) {
-        console.log('state.layouts', state.layouts);
+        // console.log('state.layouts', state.layouts);
 
         // TODO: This is just dummy-code!
         //       Improved ViewStateAction logic comes later
         // ----
         this.newLayoutRoot.title = domainContent.parentLayoutRootTitle;
-        this.newLayoutRoot.layoutColumns[0].containerGroups[0].activeDomainContentId =
-          domainContent.id;
         this.newLayoutRoot.layoutColumns[0].containerGroups[0].containers[0].domainContent =
           domainContent;
         // ----
@@ -108,16 +112,16 @@ export class ViewStateService {
       return state;
     });
   }
-  // updateState(newLayoutRoot: LayoutRoot) {
-  //   this._viewState.update((state) => {
-  //     if (state?.layouts) {
-  //       state.layouts.push(newLayoutRoot);
-  //     } else if (state) {
-  //       state.layouts = [newLayoutRoot];
-  //     }
-  //     return state;
-  //   });
-  // }
+
+  updateStateWithContentContainerWhenActiveGisbasComponentIdIsSameAsTheNewOne() {
+    console.log('updateStateWithContentContainerWhenActiveGisbasComponentIdIsSameAsTheNewOne');
+  }
+  //
+  // /DEMO
+  //
+  //
+  //
+  //
 
   private getInitialViewState(): Observable<ViewState> {
     return this.http.get<ViewState>(MOCK_URL_ViewState).pipe(
@@ -132,11 +136,26 @@ export class ViewStateService {
   private createNewLayoutRoot(parentSectionId: number): LayoutRoot {
     this.newLayoutRoot = {
       active: true,
-      layoutColumns: [this.createNewLayoutColumn()],
+      layoutColumns: this.createNewLayoutColumns(),
       parentSectionId: parentSectionId,
       title: null,
     };
     return this.newLayoutRoot;
+  }
+
+  private createNewLayoutColumns() {
+    const columns = [];
+    for (let i = 0; i < this.columnCount; i++) {
+      if (i === 0) {
+        columns.push(this.createNewLayoutColumn());
+      } else {
+        columns[i] = {
+          active: true,
+          containerGroups: [],
+        };
+      }
+    }
+    return columns;
   }
 
   private createNewLayoutColumn(): LayoutColumn {
@@ -149,7 +168,6 @@ export class ViewStateService {
   private createNewContentContainerGroup(): ContentContainerGroup {
     return {
       active: true,
-      activeDomainContentId: null,
       containers: [this.createNewContentContainer()],
     };
   }
@@ -157,7 +175,7 @@ export class ViewStateService {
   private createNewContentContainer(): ContentContainer {
     return {
       active: true,
-      gisbasComponentId: this._activeGisbasComponentId(),
+      gisbasComponentId: this.activeGisbasComponentId(),
       domainContent: {
         id: null,
         title: null,

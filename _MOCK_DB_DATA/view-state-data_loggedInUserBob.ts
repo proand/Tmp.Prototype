@@ -11,7 +11,6 @@ export const ViewStateDataLoggedInUserBob = {
           containerGroups: [
             {
               active: false,
-              activeDomainContentId: 100,
               containers: [
                 {
                   active: true,
@@ -27,7 +26,6 @@ export const ViewStateDataLoggedInUserBob = {
             },
             {
               active: false,
-              activeDomainContentId: 102,
               containers: [
                 {
                   active: false,
@@ -58,7 +56,6 @@ export const ViewStateDataLoggedInUserBob = {
           containerGroups: [
             {
               active: true,
-              activeDomainContentId: 103,
               containers: [
                 {
                   active: true,
@@ -79,7 +76,6 @@ export const ViewStateDataLoggedInUserBob = {
           containerGroups: [
             {
               active: false,
-              activeDomainContentId: 104,
               containers: [
                 {
                   active: true,

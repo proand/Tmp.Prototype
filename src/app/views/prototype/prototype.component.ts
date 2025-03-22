@@ -19,13 +19,17 @@ export class PrototypeComponent {
   private stateService = inject(ViewStateService);
 
   GisbasComponentId = GisbasComponentId;
+  gisbasComponentId: number | null = null;
+
   viewState = this.stateService.viewState;
   showLayoutMenu = this.stateService.showLayoutMenu;
   showLayoutRoot = computed(() => this.stateService.canShowLayoutRoot());
 
   prototypeLayouts = computed(() => {
     const layouts = this.viewState().layouts;
-    console.log('1. layouts', layouts);
+
+    // console.log('PrototypeComponent.prototypeLayouts: layouts', layouts);
+    // this.dealWithChangingState_WIP(this.stateService.activeGisbasComponentId());
 
     if (layouts) {
       return layouts.filter((layout) => layout.parentSectionId === GisbasSectionId.Prototype);
@@ -37,4 +41,15 @@ export class PrototypeComponent {
     const layouts = this.prototypeLayouts();
     return layouts.find((layout) => layout.active) as LayoutRoot;
   });
+
+  private dealWithChangingState_WIP(newId: number) {
+    if (newId !== this.gisbasComponentId) {
+      console.log('dealWithChangingState_WIP: newId', newId);
+      console.log(
+        'dealWithChangingState_WIP: this.gisbasComponentId (old id)',
+        this.gisbasComponentId,
+      );
+    }
+    this.gisbasComponentId = this.stateService.activeGisbasComponentId();
+  }
 }

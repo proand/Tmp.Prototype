@@ -3,7 +3,7 @@ import { GisbasSectionId } from '@GISBAS_CONNECT/gisbas-section-id.enum';
 
 const defaultPath = `${GisbasSectionId.Prototype}`;
 
-export const routes: Routes = [
+export const appRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',

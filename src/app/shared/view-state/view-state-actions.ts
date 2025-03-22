@@ -36,7 +36,6 @@ export const ViewStateUpdateActions: ViewStateUpdateActions = {
     // group.containers.forEach((container) => (container.active = false));
 
     // group.containers[t.contentContainerIndex as number].active = true;
-    // group.activeDomainContentId = t.activeDomainContentId as number;
 
     return c;
   },
