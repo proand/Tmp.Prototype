@@ -6,9 +6,9 @@ import { ViewStateService } from '@app/shared/view-state/view-state.service';
   providedIn: 'root',
 })
 export class GisbasViewStateService {
-  private stateService = inject(ViewStateService);
+  private viewStateService = inject(ViewStateService);
 
   addDomainContentDataToState(domainContent: DomainContent) {
-    this.stateService.updateStateWithDomainContent(domainContent);
+    this.viewStateService.updateStateWithDomainContent(domainContent);
   }
 }

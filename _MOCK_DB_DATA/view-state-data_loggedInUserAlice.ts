@@ -1,3 +1,3 @@
 export const ViewStateDataLoggedInUserAlice = {
-  layouts: null,
+  layoutRoots: null,
 };

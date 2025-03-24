@@ -4,42 +4,42 @@ import { SharedModule } from '@app/shared/shared.module';
 import { SpinnerComponent } from '@app/shared/components/spinner/spinner.component';
 import { ViewStateService } from '@app/shared/view-state/view-state.service';
 import { LayoutMenuComponent } from '@views/shared/layout-components/layout-menu/layout-menu.component';
-import { LayoutComponent } from '@views/shared/layout-components/layout/layout.component';
+import { LayoutRootComponent } from '@views/shared/layout-components/layout-root/layout-root.component';
 
 import { GisbasComponentId } from '@GISBAS_CONNECT/gisbas-component-id.enum';
-import { GisbasSectionId } from '@GISBAS_CONNECT/gisbas-section-id.enum';
+import { GisbasViewId } from '@GISBAS_CONNECT/gisbas-view-id.enum';
 import { LayoutRoot } from '@app/shared/view-state/view-state.models';
 
 @Component({
   selector: 'app-prototype',
-  imports: [SharedModule, SpinnerComponent, LayoutMenuComponent, LayoutComponent],
+  imports: [SharedModule, SpinnerComponent, LayoutMenuComponent, LayoutRootComponent],
   templateUrl: './prototype.component.html',
 })
 export class PrototypeComponent {
-  private stateService = inject(ViewStateService);
+  private viewStateService = inject(ViewStateService);
 
   GisbasComponentId = GisbasComponentId;
   gisbasComponentId: number | null = null;
 
-  viewState = this.stateService.viewState;
-  showLayoutMenu = this.stateService.showLayoutMenu;
-  showLayoutRoot = computed(() => this.stateService.canShowLayoutRoot());
+  viewState = this.viewStateService.viewState;
+  showLayoutMenu = this.viewStateService.showLayoutMenu;
+  showLayoutRoot = computed(() => this.viewStateService.canShowLayoutRoot());
 
-  prototypeLayouts = computed(() => {
-    const layouts = this.viewState().layouts;
+  prototypeLayoutRoots = computed(() => {
+    const layoutRoots = this.viewState().layoutRoots;
 
-    // console.log('PrototypeComponent.prototypeLayouts: layouts', layouts);
-    // this.dealWithChangingState_WIP(this.stateService.activeGisbasComponentId());
+    // console.log('PrototypeComponent.prototypeLayoutRoots: layoutRoots', layoutRoots);
+    // this.dealWithChangingState_WIP(this.viewStateService.activeGisbasComponentId());
 
-    if (layouts) {
-      return layouts.filter((layout) => layout.parentSectionId === GisbasSectionId.Prototype);
+    if (layoutRoots) {
+      return layoutRoots.filter((layoutRoot) => layoutRoot.parentviewId === GisbasViewId.Prototype);
     }
-    return [this.stateService.getNewLayoutRoot(GisbasSectionId.Prototype)];
+    return [this.viewStateService.getNewLayoutRoot(GisbasViewId.Prototype)];
   });
 
-  activePrototypeLayout = computed(() => {
-    const layouts = this.prototypeLayouts();
-    return layouts.find((layout) => layout.active) as LayoutRoot;
+  activePrototypeLayoutRoot = computed(() => {
+    const layoutRoots = this.prototypeLayoutRoots();
+    return layoutRoots.find((layoutRoot) => layoutRoot.active) as LayoutRoot;
   });
 
   private dealWithChangingState_WIP(newId: number) {
@@ -50,6 +50,6 @@ export class PrototypeComponent {
         this.gisbasComponentId,
       );
     }
-    this.gisbasComponentId = this.stateService.activeGisbasComponentId();
+    this.gisbasComponentId = this.viewStateService.activeGisbasComponentId();
   }
 }

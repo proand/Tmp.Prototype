@@ -15,12 +15,12 @@
   <!-- Innspill til diskusjon :) -->
   <!--
   <div class="me-auto">
-    <ng-container *ngTemplateOutlet="topLevelSectionItems; context: { items: mainMenuItems }"></ng-container>
+    <ng-container *ngTemplateOutlet="topLevelItems; context: { items: mainMenuItems }"></ng-container>
   </div>
   -->
 
   <div class="me-auto">
-    <ng-container *ngTemplateOutlet="activeSectionSubItems; context: { items: sectionSubMenuItems }"></ng-container>
+    <ng-container *ngTemplateOutlet="subItemsForActiveView; context: { items: subMenuItems }"></ng-container>
   </div>
 
   <div>
@@ -35,8 +35,8 @@
   </div>
 </div>
 
-<ng-template #topLevelSectionItems let-items="items">
-  <ul class="nav" id="topLevelSectionItems">
+<ng-template #topLevelItems let-items="items">
+  <ul class="nav" id="topLevelItems">
     @for (item of items; track $index) {
       <li class="nav-item">
         @if (item.routerLink) {
@@ -53,8 +53,8 @@
   </ul>
 </ng-template>
 
-<ng-template #activeSectionSubItems let-items="items">
-  <ul class="nav" id="activeSectionSubItems">
+<ng-template #subItemsForActiveView let-items="items">
+  <ul class="nav" id="activeViewSubItems">
     @for (item of items; track $index) {
       @if (item.children) {
         <ng-container *ngTemplateOutlet="dropdownItem; context: { item: item }"></ng-container>

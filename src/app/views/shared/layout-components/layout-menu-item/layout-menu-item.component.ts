@@ -10,14 +10,14 @@ import { ViewStateService } from '@app/shared/view-state/view-state.service';
   styleUrl: './layout-menu-item.component.scss',
 })
 export class LayoutMenuItemComponent implements OnInit {
-  private stateService = inject(ViewStateService);
+  private viewStateService = inject(ViewStateService);
 
-  layout = input.required<LayoutRoot>();
+  layoutRoot = input.required<LayoutRoot>();
   index = input.required<number>();
 
   ngOnInit() {
-    if (this.layout().active) {
-      this.stateService.layoutIndex = this.index();
+    if (this.layoutRoot().active) {
+      this.viewStateService.layoutIndex = this.index();
     }
   }
 }

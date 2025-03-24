@@ -1,22 +1,22 @@
 import { MenuItem } from './menu-item.model';
 
-import { GisbasSections } from '@GISBAS_CONNECT/gisbas-sections.constants';
+import { GisbasViews } from '@GISBAS_CONNECT/gisbas-views.constants';
 import { GisbasComponents } from '@GISBAS_CONNECT/gisbas-components.constant';
 
-import { GisbasSectionId as SectionId } from '@GISBAS_CONNECT/gisbas-section-id.enum';
+import { GisbasViewId as viewId } from '@GISBAS_CONNECT/gisbas-view-id.enum';
 import { GisbasComponentId as ComponentId } from '@GISBAS_CONNECT/gisbas-component-id.enum';
 
 export const mainMenuItems: MenuItem[] = [
   {
-    name: `${getSectionMenuItemName(SectionId.Prototype)}`,
-    routerLink: `${SectionId.Prototype}`,
+    name: `${getViewMenuItemName(viewId.Prototype)}`,
+    routerLink: `${viewId.Prototype}`,
     children: [
       {
         name: 'Henvendelse',
         children: [
           {
             name: `${getComponentMenuItemName(ComponentId.Henvendelse)}`,
-            routerLink: `${SectionId.Prototype}/${ComponentId.Henvendelse}`,
+            routerLink: `${viewId.Prototype}/${ComponentId.Henvendelse}`,
           },
         ],
       },
@@ -28,7 +28,7 @@ export const mainMenuItems: MenuItem[] = [
         children: [
           {
             name: `${getComponentMenuItemName(ComponentId.StandardSok)}`,
-            routerLink: `${SectionId.Prototype}/${ComponentId.StandardSok}`,
+            routerLink: `${viewId.Prototype}/${ComponentId.StandardSok}`,
           },
         ],
       },
@@ -36,8 +36,8 @@ export const mainMenuItems: MenuItem[] = [
   },
 ];
 
-export function getSectionMenuItemName(id: number): string | undefined {
-  return GisbasSections.find((section) => section.sectionId === id)?.menuItemName;
+export function getViewMenuItemName(id: number): string | undefined {
+  return GisbasViews.find((view) => view.viewId === id)?.menuItemName;
 }
 
 export function getComponentMenuItemName(id: number): string | undefined {

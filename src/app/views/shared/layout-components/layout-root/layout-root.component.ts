@@ -4,15 +4,15 @@ import { LayoutRoot } from '@app/shared/view-state/view-state.models';
 import { LayoutColumnComponent } from '../layout-column/layout-column.component';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-layout-root',
   imports: [SharedModule, LayoutColumnComponent],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  templateUrl: './layout-root.component.html',
+  styleUrl: './layout-root.component.scss',
 })
-export class LayoutComponent {
-  layout = input.required<LayoutRoot>();
+export class LayoutRootComponent {
+  layoutRoot = input.required<LayoutRoot>();
   layoutColumns = computed(() => {
     // console.log('2. columns', this.layout().layoutColumns);
-    return this.layout().layoutColumns;
+    return this.layoutRoot().layoutColumns;
   });
 }

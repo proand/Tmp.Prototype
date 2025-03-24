@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { GisbasSectionId } from '@GISBAS_CONNECT/gisbas-section-id.enum';
+import { GisbasViewId } from '@GISBAS_CONNECT/gisbas-view-id.enum';
 
-const defaultPath = `${GisbasSectionId.Prototype}`;
+const defaultPath = `${GisbasViewId.Prototype}`;
 
 export const appRoutes: Routes = [
   {

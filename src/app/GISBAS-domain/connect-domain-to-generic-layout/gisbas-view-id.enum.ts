@@ -1,4 +1,4 @@
-export enum GisbasSectionId {
+export enum GisbasViewId {
   Prototype,
 
   // Innspill til diskusjon :)

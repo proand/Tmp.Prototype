@@ -1,9 +1,9 @@
 @if (showLayoutRoot()) {
-  @if (showLayoutMenu && prototypeLayouts().length > 0) {
-    <app-layout-menu [layouts]="prototypeLayouts()"></app-layout-menu>
+  @if (showLayoutMenu && prototypeLayoutRoots().length > 0) {
+    <app-layout-menu [layoutRoots]="prototypeLayoutRoots()"></app-layout-menu>
   }
-  @if (activePrototypeLayout().layoutColumns) {
-    <app-layout [layout]="activePrototypeLayout()"></app-layout>
+  @if (activePrototypeLayoutRoot().layoutColumns) {
+    <app-layout-root [layoutRoot]="activePrototypeLayoutRoot()"></app-layout-root>
   }
 } @else {
   <div class="d-flex align-items-start align-items-center">

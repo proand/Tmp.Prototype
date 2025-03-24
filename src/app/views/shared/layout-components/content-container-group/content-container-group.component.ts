@@ -22,12 +22,12 @@ export class ContentContainerGroupComponent {
   activeIndex = 0;
 
   contentContainers = computed(() => {
-    // console.log('4. containers', this.contentContainerGroup().containers);
-    const containers = this.contentContainerGroup().containers;
-    const container = containers.find((container) => container.active);
-    if (container) {
-      this.activeIndex = containers.indexOf(container);
+    // console.log('4. contentContainers', this.contentContainerGroup().contentContainers);
+    const contentContainers = this.contentContainerGroup().contentContainers;
+    const contentContainer = contentContainers.find((container) => container.active);
+    if (contentContainer) {
+      this.activeIndex = contentContainers.indexOf(contentContainer);
     }
-    return this.contentContainerGroup().containers;
+    return this.contentContainerGroup().contentContainers;
   });
 }

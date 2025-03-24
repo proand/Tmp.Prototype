@@ -78,8 +78,8 @@ export class ViewStateService {
     return this._showLayoutMenu;
   }
 
-  getNewLayoutRoot(parentSectionId: number): LayoutRoot {
-    return this.createNewLayoutRoot(parentSectionId);
+  getNewLayoutRoot(parentviewId: number): LayoutRoot {
+    return this.createNewLayoutRoot(parentviewId);
   }
 
   //
@@ -93,21 +93,21 @@ export class ViewStateService {
       // console.log('domainContent', domainContent);
       // console.log('this.newLayoutRoot', this.newLayoutRoot);
 
-      if (state?.layouts) {
-        // console.log('state?.layouts', state?.layouts);
-        state.layouts.push(this.newLayoutRoot);
+      if (state?.layoutRoots) {
+        // console.log('state?.layoutRoots', state?.layoutRoots);
+        state.layoutRoots.push(this.newLayoutRoot);
       } else if (state) {
-        // console.log('state.layouts', state.layouts);
+        // console.log('state.layoutRoots', state.layoutRoots);
 
         // TODO: This is just dummy-code!
         //       Improved ViewStateAction logic comes later
         // ----
         this.newLayoutRoot.title = domainContent.parentLayoutRootTitle;
-        this.newLayoutRoot.layoutColumns[0].containerGroups[0].containers[0].domainContent =
+        this.newLayoutRoot.layoutColumns[0].contentContainerGroups[0].contentContainers[0].domainContent =
           domainContent;
         // ----
 
-        state.layouts = [this.newLayoutRoot];
+        state.layoutRoots = [this.newLayoutRoot];
       }
       return state;
     });
@@ -133,11 +133,11 @@ export class ViewStateService {
     );
   }
 
-  private createNewLayoutRoot(parentSectionId: number): LayoutRoot {
+  private createNewLayoutRoot(parentviewId: number): LayoutRoot {
     this.newLayoutRoot = {
       active: true,
       layoutColumns: this.createNewLayoutColumns(),
-      parentSectionId: parentSectionId,
+      parentviewId: parentviewId,
       title: null,
     };
     return this.newLayoutRoot;
@@ -151,7 +151,7 @@ export class ViewStateService {
       } else {
         columns[i] = {
           active: true,
-          containerGroups: [],
+          contentContainerGroups: [],
         };
       }
     }
@@ -161,14 +161,14 @@ export class ViewStateService {
   private createNewLayoutColumn(): LayoutColumn {
     return {
       active: true,
-      containerGroups: [this.createNewContentContainerGroup()],
+      contentContainerGroups: [this.createNewContentContainerGroup()],
     };
   }
 
   private createNewContentContainerGroup(): ContentContainerGroup {
     return {
       active: true,
-      containers: [this.createNewContentContainer()],
+      contentContainers: [this.createNewContentContainer()],
     };
   }
 

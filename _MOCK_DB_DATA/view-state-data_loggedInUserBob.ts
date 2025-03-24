@@ -1,17 +1,17 @@
 export const ViewStateDataLoggedInUserBob = {
-  layouts: [
-    { active: false, parentSectionId: 0, title: '20250313-1', columns: [] },
+  layoutRoots: [
+    { active: false, parentviewId: 0, title: '20250313-1', columns: [] },
     {
       active: true,
-      parentSectionId: 0,
+      parentviewId: 0,
       title: '20250313-2',
       layoutColumns: [
         {
           active: false,
-          containerGroups: [
+          contentContainerGroups: [
             {
               active: false,
-              containers: [
+              contentContainers: [
                 {
                   active: true,
                   gisbasComponentId: 0,
@@ -26,7 +26,7 @@ export const ViewStateDataLoggedInUserBob = {
             },
             {
               active: false,
-              containers: [
+              contentContainers: [
                 {
                   active: false,
                   gisbasComponentId: 1,
@@ -53,10 +53,10 @@ export const ViewStateDataLoggedInUserBob = {
         },
         {
           active: true,
-          containerGroups: [
+          contentContainerGroups: [
             {
               active: true,
-              containers: [
+              contentContainers: [
                 {
                   active: true,
                   gisbasComponentId: 2,
@@ -73,10 +73,10 @@ export const ViewStateDataLoggedInUserBob = {
         },
         {
           active: false,
-          containerGroups: [
+          contentContainerGroups: [
             {
               active: false,
-              containers: [
+              contentContainers: [
                 {
                   active: true,
                   gisbasComponentId: 1,
@@ -93,6 +93,6 @@ export const ViewStateDataLoggedInUserBob = {
         },
       ],
     },
-    { active: false, parentSectionId: 0, title: '20250313-3', columns: [] },
+    { active: false, parentviewId: 0, title: '20250313-3', columns: [] },
   ],
 };

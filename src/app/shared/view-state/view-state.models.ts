@@ -1,22 +1,22 @@
 export class ViewState {
-  layouts?: LayoutRoot[] | null;
+  layoutRoots?: LayoutRoot[] | null;
 }
 
 export class LayoutRoot {
   active = true;
   layoutColumns: LayoutColumn[] = [];
-  parentSectionId: number | null = null;
+  parentviewId: number | null = null;
   title: string | null = null;
 }
 
 export interface LayoutColumn {
   active: boolean;
-  containerGroups: ContentContainerGroup[];
+  contentContainerGroups: ContentContainerGroup[];
 }
 
 export interface ContentContainerGroup {
   active: boolean;
-  containers: ContentContainer[];
+  contentContainers: ContentContainer[];
 }
 
 export interface ContentContainer {
@@ -32,7 +32,7 @@ export class DomainContent {
   parentLayoutRootTitle: string | null = null;
 }
 
-export class ViewStateActionData {
+export class ActiveLayoutPath {
   contentContainerIndex?: number;
   contentContainerGroupIndex?: number;
   layoutColumnIndex?: number;

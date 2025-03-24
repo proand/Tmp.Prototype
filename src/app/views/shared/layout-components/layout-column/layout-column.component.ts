@@ -17,8 +17,8 @@ export class LayoutColumnComponent {
   index = input.required<number>();
 
   contentContainerGroups = computed(() => {
-    // console.log('3. containerGroups', this.layoutColumn().containerGroups);
-    return this.layoutColumn().containerGroups;
+    // console.log('3. contentContainerGroups', this.layoutColumn().contentContainerGroups);
+    return this.layoutColumn().contentContainerGroups;
   });
 
   containerGroupHeight = computed(() => {

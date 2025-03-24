@@ -1,6 +1,6 @@
 <span
   class="badge rounded-pill border me-3"
-  [ngClass]="{ 'text-bg-dark': layout().active, 'text-bg-light': !layout().active }"
+  [ngClass]="{ 'text-bg-dark': layoutRoot().active, 'text-bg-light': !layoutRoot().active }"
 >
-  {{ layout().title }}
+  {{ layoutRoot().title }}
 </span>

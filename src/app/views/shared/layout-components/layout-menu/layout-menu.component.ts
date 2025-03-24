@@ -10,5 +10,5 @@ import { LayoutMenuItemComponent } from '../layout-menu-item/layout-menu-item.co
   styleUrl: './layout-menu.component.scss',
 })
 export class LayoutMenuComponent {
-  layouts = input.required<LayoutRoot[]>();
+  layoutRoots = input.required<LayoutRoot[]>();
 }
