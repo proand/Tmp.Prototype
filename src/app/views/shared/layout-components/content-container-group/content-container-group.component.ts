@@ -1,9 +1,6 @@
-import { Component, computed, inject, input } from '@angular/core';
-
+import { Component, computed, input } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
-import { ViewStateService } from '@app/shared/view-state/view-state.service';
 import { ContentContainerGroup } from '@app/shared/view-state/view-state.models';
-
 import { ContentContainerComponent } from '../content-container/content-container.component';
 
 @Component({
@@ -13,8 +10,6 @@ import { ContentContainerComponent } from '../content-container/content-containe
   styleUrl: './content-container-group.component.scss',
 })
 export class ContentContainerGroupComponent {
-  private stateService = inject(ViewStateService);
-
   contentContainerGroup = input.required<ContentContainerGroup>();
   index = input.required<number>();
   layoutColumnIndex = input.required<number>();
@@ -22,9 +17,9 @@ export class ContentContainerGroupComponent {
   activeIndex = 0;
 
   contentContainers = computed(() => {
-    // console.log('4. contentContainers', this.contentContainerGroup().contentContainers);
     const contentContainers = this.contentContainerGroup().contentContainers;
     const contentContainer = contentContainers.find((container) => container.active);
+
     if (contentContainer) {
       this.activeIndex = contentContainers.indexOf(contentContainer);
     }

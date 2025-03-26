@@ -2,28 +2,31 @@ import { Component, inject } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
 import { SpinnerComponent } from '@app/shared/components/spinner/spinner.component';
 import { GisbasViewStateService } from '@GISBAS_CONNECT/gisbas-view-state.service';
+import { ViewStateService } from '@app/shared/view-state/view-state.service';
 
 @Component({
-  selector: 'app-standars-sok',
+  selector: 'app-infokort',
   imports: [SharedModule, SpinnerComponent],
-  templateUrl: './standars-sok.component.html',
-  styleUrl: './standars-sok.component.scss',
+  templateUrl: './infokort.component.html',
+  styleUrl: './infokort.component.scss',
 })
-export class StandarsSokComponent {
+export class InfokortComponent {
+  private viewStateService = inject(ViewStateService);
   private gisbasViewStateService = inject(GisbasViewStateService);
 
-  showStandarsSok = false;
+  showInfokort = false;
+  viewState = this.viewStateService.viewState;
 
   constructor() {
     setTimeout(() => {
       this.gisbasViewStateService.addDomainContentDataToState({
-        id: 101,
-        title: 'Full tittel for innhold med id 101',
-        shortTitle: 'Short-101',
+        id: 102,
+        title: 'Full tittel for innhold med id 102',
+        shortTitle: 'Short-102',
         parentLayoutRootTitle: '20250313-2',
       });
 
-      this.showStandarsSok = true;
+      this.showInfokort = true;
     }, 1000);
   }
 }

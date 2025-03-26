@@ -17,7 +17,7 @@ export class LayoutMenuItemComponent implements OnInit {
 
   ngOnInit() {
     if (this.layoutRoot().active) {
-      this.viewStateService.layoutIndex = this.index();
+      this.viewStateService.updateLayoutRootIndex(this.index());
     }
   }
 }

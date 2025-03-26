@@ -6,7 +6,6 @@ import { ViewStateService } from '@app/shared/view-state/view-state.service';
 import { LayoutMenuComponent } from '@views/shared/layout-components/layout-menu/layout-menu.component';
 import { LayoutRootComponent } from '@views/shared/layout-components/layout-root/layout-root.component';
 
-import { GisbasComponentId } from '@GISBAS_CONNECT/gisbas-component-id.enum';
 import { GisbasViewId } from '@GISBAS_CONNECT/gisbas-view-id.enum';
 import { LayoutRoot } from '@app/shared/view-state/view-state.models';
 
@@ -18,38 +17,22 @@ import { LayoutRoot } from '@app/shared/view-state/view-state.models';
 export class PrototypeComponent {
   private viewStateService = inject(ViewStateService);
 
-  GisbasComponentId = GisbasComponentId;
-  gisbasComponentId: number | null = null;
-
   viewState = this.viewStateService.viewState;
   showLayoutMenu = this.viewStateService.showLayoutMenu;
-  showLayoutRoot = computed(() => this.viewStateService.canShowLayoutRoot());
+
+  showLayoutRoot = computed(() => this.viewStateService.initialViewStateLoaded());
 
   prototypeLayoutRoots = computed(() => {
     const layoutRoots = this.viewState().layoutRoots;
 
-    // console.log('PrototypeComponent.prototypeLayoutRoots: layoutRoots', layoutRoots);
-    // this.dealWithChangingState_WIP(this.viewStateService.activeGisbasComponentId());
-
     if (layoutRoots) {
-      return layoutRoots.filter((layoutRoot) => layoutRoot.parentviewId === GisbasViewId.Prototype);
+      return layoutRoots.filter((layoutRoot) => layoutRoot.parentViewId === GisbasViewId.Prototype);
     }
-    return [this.viewStateService.getNewLayoutRoot(GisbasViewId.Prototype)];
+    return [this.viewStateService.createLayoutRoot(GisbasViewId.Prototype)];
   });
 
   activePrototypeLayoutRoot = computed(() => {
     const layoutRoots = this.prototypeLayoutRoots();
     return layoutRoots.find((layoutRoot) => layoutRoot.active) as LayoutRoot;
   });
-
-  private dealWithChangingState_WIP(newId: number) {
-    if (newId !== this.gisbasComponentId) {
-      console.log('dealWithChangingState_WIP: newId', newId);
-      console.log(
-        'dealWithChangingState_WIP: this.gisbasComponentId (old id)',
-        this.gisbasComponentId,
-      );
-    }
-    this.gisbasComponentId = this.viewStateService.activeGisbasComponentId();
-  }
 }

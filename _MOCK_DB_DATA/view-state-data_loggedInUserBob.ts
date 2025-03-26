@@ -1,9 +1,9 @@
 export const ViewStateDataLoggedInUserBob = {
   layoutRoots: [
-    { active: false, parentviewId: 0, title: '20250313-1', columns: [] },
+    { active: false, parentViewId: 0, title: '20250313-1', layoutColumns: [] },
     {
       active: true,
-      parentviewId: 0,
+      parentViewId: 0,
       title: '20250313-2',
       layoutColumns: [
         {
@@ -93,6 +93,6 @@ export const ViewStateDataLoggedInUserBob = {
         },
       ],
     },
-    { active: false, parentviewId: 0, title: '20250313-3', columns: [] },
+    { active: false, parentViewId: 0, title: '20250313-3', layoutColumns: [] },
   ],
 };

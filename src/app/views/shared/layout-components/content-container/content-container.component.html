@@ -6,7 +6,7 @@
 <!-- /DEBUGGING -->
 
 <!-- Alle skjmaer (og annet innhold) som skal kunne vises i en tab må ha hver sin @case i denne switch-en. -->
-@switch (gisbasComponentId()) {
+@switch (id()) {
   @case (GisbasComponentId.VelkommenTilDemo) {
     <app-velkommen-til-demo></app-velkommen-til-demo>
   }
@@ -16,5 +16,8 @@
   }
   @case (GisbasComponentId.StandardSok) {
     <app-standars-sok></app-standars-sok>
+  }
+  @case (GisbasComponentId.InfokortToksikologi) {
+    <app-infokort></app-infokort>
   }
 }
