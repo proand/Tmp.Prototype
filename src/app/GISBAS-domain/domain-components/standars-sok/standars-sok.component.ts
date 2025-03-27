@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
 import { SpinnerComponent } from '@app/shared/components/spinner/spinner.component';
+import { NavigationService } from '@app/shared/navigation.service';
 import { GisbasViewStateService } from '@GISBAS_CONNECT/gisbas-view-state.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { GisbasViewStateService } from '@GISBAS_CONNECT/gisbas-view-state.servic
 })
 export class StandarsSokComponent {
   private gisbasViewStateService = inject(GisbasViewStateService);
+  private navigationService = inject(NavigationService);
 
   showStandarsSok = false;
 
@@ -25,5 +27,9 @@ export class StandarsSokComponent {
 
       this.showStandarsSok = true;
     }, 1000);
+  }
+
+  navigate(routerLink: string) {
+    this.navigationService.navigate(routerLink);
   }
 }

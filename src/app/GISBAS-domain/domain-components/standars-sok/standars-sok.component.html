@@ -1,6 +1,6 @@
 @if (showStandarsSok) {
   <p>StandarsSokComponent works!</p>
-  <button type="button" class="btn btn-link" routerLink="/0/2">Infokort</button>
+  <button type="button" class="btn btn-link" (click)="navigate('/0/2')">Infokort</button>
 } @else {
   <app-spinner></app-spinner>
 }
