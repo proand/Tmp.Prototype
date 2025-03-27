@@ -106,15 +106,21 @@ export class ViewStateActionUtilities {
     return layoutRoot;
   }
 
-  setAllContentContainersToInactive(layoutColumns: LayoutColumn[]) {
+  private setAllLayoutColumnsToInactive(layoutColumns: LayoutColumn[]) {
     layoutColumns.forEach((column) => {
       column.active = false;
-      column.contentContainerGroups.forEach((group) => {
-        group.active = false;
-        group.contentContainers.forEach((container) => {
-          container.active = false;
-        });
-      });
+    });
+  }
+
+  private setAllContentContainerGroupsToInactive(column: LayoutColumn) {
+    column.contentContainerGroups.forEach((group) => {
+      group.active = false;
+    });
+  }
+
+  private setAllContentContainersToInactive(group: ContentContainerGroup) {
+    group.contentContainers.forEach((container) => {
+      container.active = false;
     });
   }
 }
