@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
-import { LayoutColumn } from '@app/shared/view-state/view-state.models';
+import { LayoutColumn } from '@app/shared/view-state/models/view-state.models';
 import { ContentContainerGroupComponent } from '../content-container-group/content-container-group.component';
 
 @Component({

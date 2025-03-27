@@ -19,7 +19,7 @@ export class InfokortComponent {
 
   constructor() {
     setTimeout(() => {
-      this.gisbasViewStateService.addDomainContentDataToState({
+      this.gisbasViewStateService.addContentFromDomainDataToViewState({
         id: 102,
         title: 'Full tittel for innhold med id 102',
         shortTitle: 'Short-102',

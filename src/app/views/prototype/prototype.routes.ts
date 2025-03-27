@@ -14,15 +14,14 @@ const canActivate: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   const componentId = parseInt(
     route.paramMap.get(PrototypeConstants.activeGisbasComponentId) as string,
   );
-  if (componentId === viewStateService.activeGisbasComponentId) {
+  if (componentId === viewStateService.sharedLayoutData.activeGisbasComponentId) {
     // console.log('Same GisbasComponent as the currently acive one');
     return true;
   }
   if (GisbasComponents.find((component) => component.id === componentId)) {
     // console.log('Not the same GisbasComponent as the currently acive one');
 
-    viewStateService.activeGisbasComponentId = componentId;
-    viewStateService.openGisbasComponent();
+    viewStateService.openGisbasComponent(componentId);
     return true;
   }
   return inject(RedirectService).redirectToPageNotFound();

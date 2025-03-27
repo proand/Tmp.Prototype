@@ -15,7 +15,7 @@ export const ViewStateDataLoggedInUserBob = {
                 {
                   active: true,
                   gisbasComponentId: 0,
-                  domainContent: {
+                  contentFromDomain: {
                     id: 100,
                     title: 'Full tittel for innhold med id 100',
                     shortTitle: 'Short-100',
@@ -30,7 +30,7 @@ export const ViewStateDataLoggedInUserBob = {
                 {
                   active: false,
                   gisbasComponentId: 1,
-                  domainContent: {
+                  contentFromDomain: {
                     id: 101,
                     title: 'Full tittel for innhold med id 101',
                     shortTitle: 'Short-101',
@@ -40,7 +40,7 @@ export const ViewStateDataLoggedInUserBob = {
                 {
                   active: true,
                   gisbasComponentId: 2,
-                  domainContent: {
+                  contentFromDomain: {
                     id: 102,
                     title: 'Full tittel for innhold med id 102',
                     shortTitle: 'Short-102',
@@ -60,7 +60,7 @@ export const ViewStateDataLoggedInUserBob = {
                 {
                   active: true,
                   gisbasComponentId: 2,
-                  domainContent: {
+                  contentFromDomain: {
                     id: 103,
                     title: 'Full tittel for innhold med id 103',
                     shortTitle: 'Short-103',
@@ -80,7 +80,7 @@ export const ViewStateDataLoggedInUserBob = {
                 {
                   active: true,
                   gisbasComponentId: 1,
-                  domainContent: {
+                  contentFromDomain: {
                     id: 104,
                     title: 'Full tittel for innhold med id 104',
                     shortTitle: 'Short-104',

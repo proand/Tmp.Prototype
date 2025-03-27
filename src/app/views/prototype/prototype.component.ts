@@ -7,7 +7,7 @@ import { LayoutMenuComponent } from '@views/shared/layout-components/layout-menu
 import { LayoutRootComponent } from '@views/shared/layout-components/layout-root/layout-root.component';
 
 import { GisbasViewId } from '@GISBAS_CONNECT/gisbas-view-id.enum';
-import { LayoutRoot } from '@app/shared/view-state/view-state.models';
+import { LayoutRoot } from '@app/shared/view-state/models/view-state.models';
 
 @Component({
   selector: 'app-prototype',

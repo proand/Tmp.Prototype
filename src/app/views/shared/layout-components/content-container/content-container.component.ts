@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
-import { ContentContainer } from '@app/shared/view-state/view-state.models';
+import { ContentContainer } from '@app/shared/view-state/models/view-state.models';
 
 import { GisbasComponentId } from '@GISBAS_CONNECT/gisbas-component-id.enum';
 import { HenvendelseComponent } from '@GISBAS_COMPONENTS/henvendelse/henvendelse.component';

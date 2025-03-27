@@ -11,8 +11,8 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="activeIndex" class="nav-tabs">
   @for (container of contentContainers(); track $index) {
     <li [ngbNavItem]="$index">
-      <button ngbNavLink title="{{ container.domainContent.title }}">
-        [Type]: {{ container.domainContent.shortTitle }}
+      <button ngbNavLink title="{{ container.contentFromDomain.title }}">
+        [Type]: {{ container.contentFromDomain.shortTitle }}
       </button>
       <ng-template ngbNavContent>
         <app-content-container [contentContainer]="container"></app-content-container>
@@ -22,12 +22,12 @@
 </ul>
 <div [ngbNavOutlet]="nav"></div>
 
-<!-- @if (contentContainers()[0].domainContent.id) {
+<!-- @if (contentContainers()[0].contentFromDomain.id) {
   <ul ngbNav #nav="ngbNav" [(activeId)]="activeIndex" class="nav-tabs">
     @for (container of contentContainers(); track $index) {
       <li [ngbNavItem]="$index">
-        <button ngbNavLink title="{{ container.domainContent.title }}">
-          {{ container.domainContent.shortTitle }}
+        <button ngbNavLink title="{{ container.contentFromDomain.title }}">
+          {{ container.contentFromDomain.shortTitle }}
         </button>
         <ng-template ngbNavContent>
           <app-content-container [contentContainer]="container"></app-content-container>

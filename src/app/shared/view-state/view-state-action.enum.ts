@@ -1,4 +1,4 @@
 export enum ViewStateAction {
-  addDomainContent,
+  addContentFromDomain,
   openGisbasComponent,
 }

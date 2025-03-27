@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ViewStateAction } from '@app/shared/view-state/view-state-action.enum';
-import { DomainContent } from '@app/shared/view-state/view-state.models';
+import { ContentFromDomain } from '@app/shared/view-state/models/view-state.models';
 import { ViewStateService } from '@app/shared/view-state/view-state.service';
 
 @Injectable({
@@ -9,8 +9,8 @@ import { ViewStateService } from '@app/shared/view-state/view-state.service';
 export class GisbasViewStateService {
   private viewStateService = inject(ViewStateService);
 
-  addDomainContentDataToState(domainContent: DomainContent) {
-    this.viewStateService.domainContent = domainContent;
-    this.viewStateService.updateViewState(ViewStateAction.addDomainContent);
+  addContentFromDomainDataToViewState(contentFromDomain: ContentFromDomain) {
+    this.viewStateService.sharedLayoutData.contentFromDomain = contentFromDomain;
+    this.viewStateService.updateViewState(ViewStateAction.addContentFromDomain);
   }
 }

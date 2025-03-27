@@ -16,7 +16,7 @@ export class StandarsSokComponent {
 
   constructor() {
     setTimeout(() => {
-      this.gisbasViewStateService.addDomainContentDataToState({
+      this.gisbasViewStateService.addContentFromDomainDataToViewState({
         id: 101,
         title: 'Full tittel for innhold med id 101',
         shortTitle: 'Short-101',

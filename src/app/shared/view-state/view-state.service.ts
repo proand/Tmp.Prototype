@@ -3,62 +3,42 @@ import { catchError, delay, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environment';
-import {
-  ActionFn,
-  ContentContainer,
-  ContentContainerGroup,
-  DomainContent,
-  LayoutActivePathIndexes,
-  LayoutColumn,
-  LayoutRoot,
-  ViewState,
-} from './view-state.models';
-
-// import { ViewStateActionFunctions } from './view-state-action-functions';
+import { SharedLayoutData } from './models/shared-layout-data.model';
+import { LayoutRoot, ViewState } from './models/view-state.models';
 import { ViewStateAction } from './view-state-action.enum';
-import { ViewStateActionFunctions } from './view-state-action-functions';
-import { GisbasComponentId } from '@GISBAS_CONNECT/gisbas-component-id.enum';
+import { ViewStateActionFunctionsMap } from './view-state-action-functions';
+import { ViewStateActionUtilities } from './view-state-action-utility-functions';
+
+const util = new ViewStateActionUtilities();
 
 //
 // DEMO
 //
 const MOCK_URL_ViewState = `${environment.apiBaseUrl}/ViewStateDataLoggedInUserAlice`;
 // const MOCK_URL_ViewState = `${environment.apiBaseUrl}/ViewStateDataLoggedInUserBob`;
+//
 
 @Injectable({
   providedIn: 'root',
 })
 export class ViewStateService {
   private http = inject(HttpClient);
-  private layoutRootFromViewComponent: LayoutRoot = new LayoutRoot();
-
   private _viewState: WritableSignal<ViewState> = signal(new ViewState());
   private _initialViewStateLoaded: WritableSignal<boolean> = signal(false);
 
   //
   // DEMO
-  // - Denne verdien må leses fra bruker config
-  //
-  private columnCount = 3;
-  //
-
-  //
-  // DEMO
   // - Bob er et innspill til diskusjon (endre MOCK_URL_ViewState for å få Bobs data)
+  // - Blir en del av viewState hvis den blir med i GISBAS-appen
   //
   showLayoutMenu = false; // Alice
   // private _showLayoutMenu = true; // Bob
   //
 
-  activeGisbasComponentId: number = 0;
-  domainContent: DomainContent = new DomainContent();
-  layoutColumns: LayoutColumn[] = [];
-  layoutActivePathIndexes: LayoutActivePathIndexes = new LayoutActivePathIndexes();
+  sharedLayoutData = new SharedLayoutData();
 
   constructor() {
     this.getInitialViewState().subscribe((state) => {
-      // console.log('0. state', state);
-
       this._viewState.set(state);
       this._initialViewStateLoaded.set(true);
     });
@@ -73,67 +53,39 @@ export class ViewStateService {
   }
 
   createLayoutRoot(parentViewId: number): LayoutRoot {
+    const root = util.createLayoutRoot(parentViewId, this.sharedLayoutData);
     this.updateLayoutRootIndex(parentViewId);
-    this.layoutRootFromViewComponent = {
-      active: true,
-      layoutColumns: this.createLayoutColumns(),
-      parentViewId: parentViewId,
-      title: null,
-    };
-    return this.layoutRootFromViewComponent;
-  }
-
-  createContentContainerGroup(): ContentContainerGroup {
-    this.updateContentContainerGroupIndex(0);
-    return {
-      active: true,
-      contentContainers: [this.createContentContainer()],
-    };
-  }
-
-  updateContentContainerIndex(index: number) {
-    this.layoutActivePathIndexes.contentContainerIndex = index;
-  }
-
-  updateContentContainerGroupIndex(index: number) {
-    this.layoutActivePathIndexes.contentContainerGroupIndex = index;
-  }
-
-  updateLayoutColumnIndex(index: number) {
-    this.layoutActivePathIndexes.layoutColumnIndex = index;
+    this.sharedLayoutData.newLayoutRoot = root;
+    return root;
   }
 
   updateLayoutRootIndex(index: number) {
-    this.layoutActivePathIndexes.layoutRootIndex = index;
+    this.sharedLayoutData.layoutActivePathIndexes.layoutRootIndex = index;
   }
 
-  openGisbasComponent() {
+  openGisbasComponent(componentId: number) {
+    this.sharedLayoutData.activeGisbasComponentId = componentId;
     this.updateViewState(ViewStateAction.openGisbasComponent);
   }
 
+  /**
+   * NB!
+   *
+   * The ViewState object and the SharedLayoutData object
+   * is mutated by reference in
+   * - ViewStateActionFunctionsMap functions
+   * - ViewStateActionUtilities methods
+   */
   updateViewState(actionFn: number) {
-    this.layoutActivePathIndexes = this.updateActivePathBasedOnPrActionRules(actionFn);
-
     this._viewState.update((state) => {
-      const layoutRootIndex = this.layoutActivePathIndexes.layoutRootIndex;
+      const fn = ViewStateActionFunctionsMap.get(actionFn);
 
-      this.layoutColumns =
-        layoutRootIndex !== undefined &&
-        state.layoutRoots &&
-        state.layoutRoots[layoutRootIndex].layoutColumns
-          ? state.layoutRoots[layoutRootIndex].layoutColumns
-          : [];
-
-      if (this.layoutColumns.length > 0) {
-        this.callActionFunction(ViewStateActionFunctions[actionFn], this);
-      } else if (state) {
-        if (actionFn === ViewStateAction.addDomainContent) {
-          this.layoutRootFromViewComponent.title = this.domainContent.parentLayoutRootTitle;
-          this.layoutColumns = this.layoutRootFromViewComponent.layoutColumns;
-          state.layoutRoots = [this.layoutRootFromViewComponent];
-          this.callActionFunction(ViewStateActionFunctions[actionFn], this);
-        }
+      if (fn === undefined) {
+        throw new Error('ViewStateActionFunctionsMap.get(actionFn) === undefined');
+      } else {
+        fn(state, this.sharedLayoutData);
       }
+
       return state;
     });
   }
@@ -146,74 +98,5 @@ export class ViewStateService {
         throw error;
       }),
     );
-  }
-
-  private createLayoutColumns() {
-    const columns = [];
-    for (let i = 0; i < this.columnCount; i++) {
-      if (i === 0) {
-        columns.push(this.createLayoutColumn());
-      } else {
-        columns[i] = {
-          active: false,
-          contentContainerGroups: [],
-        };
-      }
-    }
-    return columns;
-  }
-
-  private createLayoutColumn(): LayoutColumn {
-    this.updateLayoutColumnIndex(0);
-    return {
-      active: true,
-      contentContainerGroups: [this.createContentContainerGroup()],
-    };
-  }
-
-  private createContentContainer(): ContentContainer {
-    this.updateContentContainerIndex(0);
-    return {
-      active: true,
-      gisbasComponentId: this.activeGisbasComponentId,
-      domainContent: {
-        id: null,
-        title: null,
-        shortTitle: null,
-        parentLayoutRootTitle: null,
-      },
-    };
-  }
-
-  private updateActivePathBasedOnPrActionRules(actionFn: number): LayoutActivePathIndexes {
-    if (
-      actionFn === ViewStateAction.openGisbasComponent &&
-      this.activeGisbasComponentId === GisbasComponentId.StandardSok
-    ) {
-      this.layoutActivePathIndexes.layoutColumnIndex = 1;
-    }
-    if (
-      actionFn === ViewStateAction.openGisbasComponent &&
-      this.activeGisbasComponentId === GisbasComponentId.InfokortToksikologi
-    ) {
-      this.layoutActivePathIndexes.layoutColumnIndex = 2;
-    }
-    return this.layoutActivePathIndexes;
-  }
-
-  private setAllContentContainersToInactive(layoutColumns: LayoutColumn[]) {
-    layoutColumns.forEach((column) => {
-      column.active = false;
-      column.contentContainerGroups.forEach((group) => {
-        group.active = false;
-        group.contentContainers.forEach((container) => {
-          container.active = false;
-        });
-      });
-    });
-  }
-
-  private callActionFunction(fn: ActionFn, viewStateService: ViewStateService) {
-    fn(viewStateService);
   }
 }

@@ -16,7 +16,7 @@ export class HenvendelseComponent {
 
   constructor() {
     setTimeout(() => {
-      this.gisbasViewStateService.addDomainContentDataToState({
+      this.gisbasViewStateService.addContentFromDomainDataToViewState({
         id: 100,
         title: 'Full tittel for innhold med id 100',
         shortTitle: 'Short-100',
