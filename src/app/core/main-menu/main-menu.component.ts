@@ -27,8 +27,5 @@ export class MainMenuComponent implements OnInit {
 
   navigate(routerLink: string) {
     this.router.navigate([routerLink], { skipLocationChange: true });
-
-    // DEBUGGING
-    // this.router.navigate([routerLink]);
   }
 }

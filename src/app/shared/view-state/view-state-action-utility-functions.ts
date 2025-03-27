@@ -118,21 +118,21 @@ export class ViewStateActionUtilities {
     });
   }
 
-  setAllLayoutColumnsToInactive(layoutColumns: LayoutColumn[]) {
-    layoutColumns.forEach((column) => {
-      column.active = false;
-    });
-  }
+  // setAllLayoutColumnsToInactive(layoutColumns: LayoutColumn[]) {
+  //   layoutColumns.forEach((column) => {
+  //     column.active = false;
+  //   });
+  // }
 
-  setAllContentContainerGroupsToInactive(column: LayoutColumn) {
-    column.contentContainerGroups.forEach((group) => {
-      group.active = false;
-    });
-  }
+  // setAllContentContainerGroupsToInactive(column: LayoutColumn) {
+  //   column.contentContainerGroups.forEach((group) => {
+  //     group.active = false;
+  //   });
+  // }
 
-  setAllContentContainersToInactive(group: ContentContainerGroup) {
-    group.contentContainers.forEach((container) => {
-      container.active = false;
-    });
-  }
+  // setAllContentContainersToInactive(group: ContentContainerGroup) {
+  //   group.contentContainers.forEach((container) => {
+  //     container.active = false;
+  //   });
+  // }
 }

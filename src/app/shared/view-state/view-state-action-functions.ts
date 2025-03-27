@@ -35,6 +35,9 @@ ViewStateActionFunctionsMap.set(
       data.layoutActivePathIndexes.layoutColumnIndex = 2;
     }
     if (state.layoutRoots) {
+      util.setAllLayoutColumnsAndChildrenToInactive(
+        util.getLayoutRootByIndex(state, data).layoutColumns,
+      );
       util.getLayoutColumnByIndex(state, data).active = true;
       util.createContentContainerGroupByIndex(state, data);
     }
