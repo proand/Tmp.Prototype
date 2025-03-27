@@ -69,7 +69,7 @@ export class StandarsSokComponent {
             Synonym: '',
             Kategori: 'Legemiddel',
             Status: 'Godkjent',
-            InfokortLink: '103',
+            InfokortLink: '102',
           },
           {
             Navn: 'Paracetamol',
@@ -78,7 +78,7 @@ export class StandarsSokComponent {
             Synonym: 'Acetaminophen, N-acetyl-aminofenol',
             Kategori: 'Kjemisk forbindelse',
             Status: 'Godkjent',
-            InfokortLink: '104',
+            InfokortLink: '103',
           },
         ];
 
@@ -91,7 +91,7 @@ export class StandarsSokComponent {
             Synonym: '',
             Kategori: 'Legemiddel',
             Status: 'Godkjent',
-            InfokortLink: '105',
+            InfokortLink: '104',
           },
           {
             Navn: 'Ibux gel',
@@ -100,7 +100,7 @@ export class StandarsSokComponent {
             Synonym: '',
             Kategori: 'Legemiddel',
             Status: 'Godkjent',
-            InfokortLink: '106',
+            InfokortLink: '105',
           },
         ];
 
