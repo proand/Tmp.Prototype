@@ -15,13 +15,6 @@ const DEMO_config = { columnCount: 3 };
 //
 
 export class ViewStateActionUtilities {
-  createContentContainerGroupByIndex(state: ViewState, data: SharedLayoutData) {
-    const indexs = data.layoutActivePathIndexes;
-    this.getLayoutColumnByIndex(state, data).contentContainerGroups[
-      indexs.contentContainerGroupIndex
-    ] = this.createContentContainerGroup(data);
-  }
-
   createLayoutRoot(parentViewId: number, data: SharedLayoutData): LayoutRoot {
     return {
       active: true,
@@ -73,6 +66,13 @@ export class ViewStateActionUtilities {
     };
   }
 
+  createContentContainerGroupByIndex(state: ViewState, data: SharedLayoutData) {
+    const indexs = data.layoutActivePathIndexes;
+    this.getLayoutColumnByIndex(state, data).contentContainerGroups[
+      indexs.contentContainerGroupIndex
+    ] = this.createContentContainerGroup(data);
+  }
+
   getContentContainerByIndex(state: ViewState, data: SharedLayoutData): ContentContainer {
     const indexs = data.layoutActivePathIndexes;
     return this.getContentContainerGroupByIndex(state, data).contentContainers[
@@ -97,28 +97,40 @@ export class ViewStateActionUtilities {
     if (state.layoutRoots) {
       return state.layoutRoots[indexs.layoutRootIndex];
     }
-    return this.getNewLayoutRoot(data);
+    return this.getNewLayoutRootFromSharedLayoutData(data);
   }
 
-  getNewLayoutRoot(data: SharedLayoutData): LayoutRoot {
+  getNewLayoutRootFromSharedLayoutData(data: SharedLayoutData): LayoutRoot {
     const layoutRoot = data.newLayoutRoot;
     layoutRoot.title = data.contentFromDomain.parentLayoutRootTitle;
     return layoutRoot;
   }
 
-  private setAllLayoutColumnsToInactive(layoutColumns: LayoutColumn[]) {
+  setAllLayoutColumnsAndChildrenToInactive(layoutColumns: LayoutColumn[]) {
+    layoutColumns.forEach((column) => {
+      column.active = false;
+      column.contentContainerGroups.forEach((group) => {
+        group.active = false;
+        group.contentContainers.forEach((container) => {
+          container.active = false;
+        });
+      });
+    });
+  }
+
+  setAllLayoutColumnsToInactive(layoutColumns: LayoutColumn[]) {
     layoutColumns.forEach((column) => {
       column.active = false;
     });
   }
 
-  private setAllContentContainerGroupsToInactive(column: LayoutColumn) {
+  setAllContentContainerGroupsToInactive(column: LayoutColumn) {
     column.contentContainerGroups.forEach((group) => {
       group.active = false;
     });
   }
 
-  private setAllContentContainersToInactive(group: ContentContainerGroup) {
+  setAllContentContainersToInactive(group: ContentContainerGroup) {
     group.contentContainers.forEach((container) => {
       container.active = false;
     });

@@ -16,7 +16,7 @@ ViewStateActionFunctionsMap.set(
     // console.log('### addContentFromDomain: state', state);
     // console.log('### addContentFromDomain: data', data);
     if (!state.layoutRoots) {
-      state.layoutRoots = [util.getNewLayoutRoot(data)];
+      state.layoutRoots = [util.getNewLayoutRootFromSharedLayoutData(data)];
     }
     util.getContentContainerByIndex(state, data).contentFromDomain = data.contentFromDomain;
   },
