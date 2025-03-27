@@ -1,6 +1,44 @@
 @if (showStandarsSok) {
-  <p>StandarsSokComponent works!</p>
-  <button type="button" class="btn btn-link" (click)="navigate('/0/2')">Infokort</button>
+  <input
+    class="form-control w-50"
+    type="text"
+    placeholder="Standard søk"
+    (keydown)="sok($event)"
+    [(ngModel)]="soketerm"
+  />
+
+  @if (sokeresultat) {
+    <hr />
+
+    @if (sokeresultat.length > 0) {
+      <table class="table table-hover w-100" style="cursor: pointer">
+        <thead>
+          <tr>
+            <th scope="col">Navn</th>
+            <th scope="col">TypeInfokort</th>
+            <th scope="col">Gruppetype</th>
+            <!-- <th scope="col">Synonym</th> -->
+            <th scope="col">Kategori</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of sokeresultat; track $index) {
+            <tr (click)="navigate('/0/2')">
+              <td>{{ item.Navn }}</td>
+              <td>{{ item.TypeInfokort }}</td>
+              <td>{{ item.Gruppetype }}</td>
+              <!-- <td>{{ item.Synonym }}</td> -->
+              <td>{{ item.Kategori }}</td>
+              <td>{{ item.Status }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p>Søket på "{{ soketerm }}" ga ingen treff.</p>
+    }
+  }
 } @else {
   <app-spinner></app-spinner>
 }
