@@ -3,6 +3,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { SpinnerComponent } from '@app/shared/components/spinner/spinner.component';
 import { NavigationService } from '@app/shared/navigation.service';
 import { GisbasViewStateService } from '@GISBAS_CONNECT/gisbas-view-state.service';
+import { GisbasComponentId } from '@GISBAS_CONNECT/gisbas-component-id.enum';
 
 interface Sokeresultat {
   Navn: string;
@@ -49,8 +50,8 @@ export class StandarsSokComponent {
     }
   }
 
-  navigate(routerLink: string) {
-    this.navigationService.navigate(routerLink);
+  navigate(id: string) {
+    this.navigationService.navigate(GisbasComponentId.InfokortToksikologi, id);
   }
 
   getSokeresultat(soketerm: string): Sokeresultat[] | null {
@@ -68,7 +69,7 @@ export class StandarsSokComponent {
             Synonym: '',
             Kategori: 'Legemiddel',
             Status: 'Godkjent',
-            InfokortLink: '0/2',
+            InfokortLink: '103',
           },
           {
             Navn: 'Paracetamol',
@@ -77,7 +78,7 @@ export class StandarsSokComponent {
             Synonym: 'Acetaminophen, N-acetyl-aminofenol',
             Kategori: 'Kjemisk forbindelse',
             Status: 'Godkjent',
-            InfokortLink: 'TODO',
+            InfokortLink: '104',
           },
         ];
 
@@ -90,7 +91,7 @@ export class StandarsSokComponent {
             Synonym: '',
             Kategori: 'Legemiddel',
             Status: 'Godkjent',
-            InfokortLink: 'TODO',
+            InfokortLink: '105',
           },
           {
             Navn: 'Ibux gel',
@@ -99,7 +100,7 @@ export class StandarsSokComponent {
             Synonym: '',
             Kategori: 'Legemiddel',
             Status: 'Godkjent',
-            InfokortLink: 'TODO',
+            InfokortLink: '106',
           },
         ];
 

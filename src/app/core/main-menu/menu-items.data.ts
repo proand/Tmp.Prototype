@@ -9,14 +9,14 @@ import { GisbasComponentId as ComponentId } from '@GISBAS_CONNECT/gisbas-compone
 export const mainMenuItems: MenuItem[] = [
   {
     name: `${getViewMenuItemName(viewId.Prototype)}`,
-    routerLink: `${viewId.Prototype}`,
+    gisbasViewId: viewId.Prototype,
     children: [
       {
         name: 'Henvendelse',
         children: [
           {
             name: `${getComponentMenuItemName(ComponentId.Henvendelse)}`,
-            routerLink: `${viewId.Prototype}/${ComponentId.Henvendelse}`,
+            gisbasComponentId: ComponentId.Henvendelse,
           },
         ],
       },
@@ -28,7 +28,7 @@ export const mainMenuItems: MenuItem[] = [
         children: [
           {
             name: `${getComponentMenuItemName(ComponentId.StandardSok)}`,
-            routerLink: `${viewId.Prototype}/${ComponentId.StandardSok}`,
+            gisbasComponentId: ComponentId.StandardSok,
           },
         ],
       },

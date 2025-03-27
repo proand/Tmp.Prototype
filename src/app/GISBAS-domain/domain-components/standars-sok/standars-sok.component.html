@@ -24,7 +24,7 @@
         </thead>
         <tbody>
           @for (item of sokeresultat; track $index) {
-            <tr (click)="navigate('/0/2')">
+            <tr (click)="navigate(item.InfokortLink)">
               <td>{{ item.Navn }}</td>
               <td>{{ item.TypeInfokort }}</td>
               <td>{{ item.Gruppetype }}</td>

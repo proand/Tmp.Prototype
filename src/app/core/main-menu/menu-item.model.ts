@@ -1,6 +1,7 @@
 export interface MenuItem {
   name: string;
-  routerLink?: string;
+  gisbasViewId?: number;
+  gisbasComponentId?: number;
   href?: string;
   children?: MenuItem[];
 

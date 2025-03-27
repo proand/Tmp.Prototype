@@ -39,8 +39,8 @@
   <ul class="nav" id="topLevelItems">
     @for (item of items; track $index) {
       <li class="nav-item">
-        @if (item.routerLink) {
-          <a class="nav-link" (click)="navigate(item.routerLink)">
+        @if (item.viewId) {
+          <a class="nav-link" (click)="navigateToView(item.viewId)">
             {{ item.name }}
           </a>
         } @else {
@@ -58,9 +58,9 @@
     @for (item of items; track $index) {
       @if (item.children) {
         <ng-container *ngTemplateOutlet="dropdownItem; context: { item: item }"></ng-container>
-      } @else if (item.routerLink) {
+      } @else if (item.gisbasComponentId) {
         <li class="nav-item">
-          <a class="nav-link" (click)="navigate(item.routerLink)">
+          <a class="nav-link" (click)="navigate(item.gisbasComponentId)">
             {{ item.name }}
           </a>
         </li>
@@ -83,7 +83,7 @@
         @if (item.children) {
           <ng-container *ngTemplateOutlet="dropdownItem; context: { item: item }"></ng-container>
         } @else {
-          <button (click)="navigate(item.routerLink)" ngbDropdownItem>
+          <button (click)="navigate(item.gisbasComponentId)" ngbDropdownItem>
             {{ item.name }}
           </button>
         }

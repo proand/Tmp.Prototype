@@ -24,7 +24,11 @@ export class MainMenuComponent implements OnInit {
     )?.children as MenuItem[];
   }
 
-  navigate(routerLink: string) {
-    this.navigationService.navigate(routerLink);
+  navigate(gisbasComponentId: number) {
+    this.navigationService.navigate(gisbasComponentId);
+  }
+
+  navigateToView(viewId: number) {
+    this.navigationService.navigateToView(viewId);
   }
 }
